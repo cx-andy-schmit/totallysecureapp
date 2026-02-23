@@ -19,9 +19,30 @@ jobs:
           tar -xzvf ScaResolver-linux64.tar.gz
           rm -rf ScaResolver-linux64.tar.gz
 
-      - name: Install Maven, NPM, ... # Add any necessary package management
+      - name: Install Maven and NPM
         run: |
-          sudo apt install maven npm
+          sudo apt-get update -y
+          sudo apt-get install -y maven npm
+
+      - name: Verify Maven and NPM Versions
+        run: |
+          echo "Checking Maven version..."
+          if command -v mvn >/dev/null 2>&1; then
+            mvn -version
+          else
+            echo "Maven is NOT installed."
+            exit 1
+          fi
+
+          echo ""
+          echo "Checking NPM version..."
+          if command -v npm >/dev/null 2>&1; then
+            npm -v
+            node -v
+          else
+            echo "NPM is NOT installed."
+            exit 1
+          fi
 
       - name: Run Checkmarx One CLI Scan
         run: |
