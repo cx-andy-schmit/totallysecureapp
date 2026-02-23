@@ -59,3 +59,4 @@ jobs:
             --client-id ${{ secrets.CX_CLIENT_ID }} \
             --client-secret ${{ secrets.CX_CLIENT_SECRET }} \
             --sca-resolver ./ScaResolver
+            --sca-resolver-params "--log-level Debug"
